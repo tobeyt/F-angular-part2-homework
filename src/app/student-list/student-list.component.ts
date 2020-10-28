@@ -6,18 +6,19 @@ import { StudentService } from '../student.service';
 @Component({
   selector: 'app-student-list',
   templateUrl: './student-list.component.html',
-  styleUrls: ['./student-list.component.sass']
+  styleUrls: ['./student-list.component.sass'],
 })
 export class StudentListComponent implements OnInit {
   students: Student[];
   selected: string;
   target: string;
 
-  constructor(private router: Router,
-              private studentService: StudentService) { }
+  constructor(private router: Router, private studentService: StudentService) {}
 
   ngOnInit(): void {
-    this.students = this.studentService.getStudents();
+    this.studentService
+      .getStudents()
+      .subscribe((students) => (this.students = [...students]));
   }
 
   goto(): void {
